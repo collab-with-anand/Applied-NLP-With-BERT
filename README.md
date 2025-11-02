@@ -1,33 +1,30 @@
-# Applied NLP with BERT: A Toolkit for Sentiment Analysis and Topic Modeling
+# Applied NLP: A Toolkit for Text Classification & Topic Modeling
 
-This project demonstrates and compares different methods for applying BERT to common Natural Language Processing tasks. It provides hands-on examples for both **supervised text classification** (sentiment analysis) and **unsupervised text mining** (topic modeling).
+This repository provides a collection of practical, hands-on notebooks for common Natural Language Processing (NLP) tasks. It serves as a toolkit for comparing different architectures, including Transformer-based (BERT) and RNN-based (BiLSTM) models.
 
 ## 🚀 Project Components
 
-This repository is broken down into three main demonstrations, each contained in its own notebook within the `/notebooks` directory.
+This repository is broken down into four key demonstrations, each in its own notebook within the `/notebooks` directory.
 
-### 1. Sentiment Analysis (Method 1: TensorFlow Hub + Keras)
-* **Notebook:** `1_Sentiment_Analysis_TFHub.ipynb`
-* **Goal:** To build a sentiment classifier by fine-tuning a BERT model directly within a Keras workflow.
-* **Key Features:**
-    * Uses **TensorFlow Hub (`tfhub`)** to load a `small_bert` model.
-    * Integrates a matching preprocessing layer from `tensorflow_text` directly into the `tf.keras.Model`.
-    * Demonstrates a simple and efficient way to fine-tune a model for a custom dataset (IMDB reviews).
+### 1. Unsupervised Topic Modeling (BERTopic)
+* **Notebook:** `1_Topic_Modeling_BERTopic.ipynb`
+* **Task:** Unsupervised topic modeling on the US Airline Tweets dataset.
+* **Method:** Uses the **`bertopic`** library, which leverages BERT embeddings for document clustering. It demonstrates how to extract and visualize topics, their relationships (heatmaps, hierarchy), and their evolution over time.
 
-### 2. Sentiment Analysis (Method 2: Hugging Face Transformers)
-* **Notebook:** `2_Sentiment_Analysis_Transformers.ipynb`
-* **Goal:** To build a sentiment classifier using the Hugging Face `transformers` library.
-* **Key Features:**
-    * Uses `TFBertForSequenceClassification` from the `transformers` library.
-    * Shows a more manual data processing pipeline using `InputExample` and `InputFeatures`.
-    * This approach is powerful when you need more granular control over the tokenization and model configuration.
+### 2. Sentiment Analysis (BERT via TensorFlow Hub)
+* **Notebook:** `2_Sentiment_Analysis_BERT_TFHub.ipynb`
+* **Task:** Binary sentiment analysis on IMDB movie reviews.
+* **Method:** Fine-tunes a `small_bert` model loaded from **TensorFlow Hub (`tfhub`)** within a simple Keras workflow, integrating a `tensorflow_text` preprocessing layer directly into the `tf.keras.Model`.
 
-### 3. Topic Modeling (BERTopic)
-* **Notebook:** `3_Topic_Modeling_BERTopic.ipynb`
-* **Goal:** To perform unsupervised topic modeling on the US Airline Tweets dataset to discover key themes and complaints.
-* **Key Features:**
-    * Uses the **`bertopic`** library, which leverages BERT embeddings for document clustering.
-    * Demonstrates how to extract and visualize topics, topic relationships (heatmaps, hierarchy), and topic evolution over time.
+### 3. Sentiment Analysis (BERT via Hugging Face)
+* **Notebook:** `3_Sentiment_Analysis_BERT_Transformers.ipynb`
+* **Task:** Binary sentiment analysis on IMDB movie reviews.
+* **Method:** Uses the **Hugging Face `transformers`** library (`TFBertForSequenceClassification`) and shows a more manual data processing pipeline using `InputExample` and `InputFeatures` for greater control.
+
+### 4. Text Classification (BiLSTM with Attention)
+* **Notebook:** `4_Text_Classification_BiLSTM_Attention.ipynb`
+* **Task:** Multi-class text classification on the 20 Newsgroups dataset.
+* **Method:** Implements a **Bidirectional LSTM (BiLSTM)** with a **custom Attention layer** in TensorFlow/Keras. This demonstrates a powerful RNN-based architecture that serves as an excellent comparison to the Transformer models.
 
 ---
 
@@ -37,8 +34,8 @@ To run this project, follow these steps.
 
 1.  **Clone the Repository**
     ```bash
-    git clone [https://github.com/your-username/Applied-NLP-with-BERT.git](https://github.com/your-username/Applied-NLP-with-BERT.git)
-    cd Applied-NLP-with-BERT
+    git clone [https://github.com/your-username/Applied-NLP-Toolkit.git](https://github.com/your-username/Applied-NLP-Toolkit.git)
+    cd Applied-NLP-Toolkit
     ```
 
 2.  **Create a Virtual Environment** (Recommended)
@@ -53,7 +50,7 @@ To run this project, follow these steps.
     ```
 
 4.  **Download spaCy Model**
-    The topic modeling notebook (`3_Topic_Modeling_BERTopic.ipynb`) requires a spaCy model.
+    The topic modeling notebook (`1_Topic_Modeling_BERTopic.ipynb`) requires a spaCy model.
     ```bash
     python -m spacy download en_core_web_lg
     ```
@@ -68,5 +65,6 @@ To run this project, follow these steps.
 
 ## 📊 Datasets
 
-* **IMDB Movie Reviews:** Used by both sentiment analysis notebooks. The data is downloaded automatically by the scripts from `https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz`.
-* **Twitter US Airline Sentiment:** Used by the `3_Topic_Modeling_BERTopic.ipynb` notebook. The `Tweets.csv` file is included in the `/data` directory.
+* **IMDB Movie Reviews:** Used by the sentiment analysis notebooks. The data is downloaded automatically by the scripts.
+* **Twitter US Airline Sentiment:** Used by the topic modeling notebook. The `Tweets.csv` file is included in the `/data` directory.
+* **20 Newsgroups:** Used by the BiLSTM notebook. The notebook expects `newsgroups-train.json` and `newsgroups-test.json`. These can be acquired from public sources (like Kaggle) or generated using `sklearn.datasets.fetch_20newsgroups`.
